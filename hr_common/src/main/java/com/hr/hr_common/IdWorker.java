@@ -12,30 +12,31 @@ import java.net.NetworkInterface;
  * 12 bit 毫秒内的计数器 每个节点每毫秒最多产生2的4096个ID
  */
 public class IdWorker {
+    // 时间起始标记点
     private final static long twepoch = 1231231231234L;
-
+    // 机器标识位数
     private final static long workerIdBits = 5L;
-
+    // 数据中心标识位数
     private final static long datacenterIdBits = 5L;
-
+    // 机器ID最大值
     private final static long maxWorkerId = -1L ^ (-1L << workerIdBits);
-
+    // 数据中心ID最大值
     private final static long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
-
+    // 毫秒内自增
     private final static long sequenceBits = 12L;
-
+    // 机器ID 左移
     private final static long workerIdShift = sequenceBits;
-
+    // 数据中心 左移
     private final static long datacenterIdShift = sequenceBits + workerIdBits;
-
+    // 时间毫秒 左移
     private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
     private final static long sequenceMask = -1L ^ (-1L << sequenceBits);
-
+    // 上次ID时间戳
     private static long lastTimestamp = -1L;
-
+    // 并发控制
     private long sequence = 0L;
-
+    // 数据标识ID
     private final long datacenterId;
 
     private final long workerId;
@@ -58,6 +59,10 @@ public class IdWorker {
         this.datacenterId = datacenterId;
     }
 
+    /**
+     * 获取下一个ID
+     * @return 新ID
+     */
     public synchronized long nextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
@@ -65,14 +70,17 @@ public class IdWorker {
         }
 
         if (lastTimestamp == timestamp) {
+            // 当前毫秒内 +1
             sequence = (sequence + 1) & sequence;
             if (sequence == 0) {
+                // 当前毫秒内满则等待至下一秒
                 timestamp = tilNextmillis(lastTimestamp);
             }
         } else {
             sequence = 0L;
         }
         lastTimestamp = timestamp;
+        // 组合ID
         return  ((timestamp - twepoch) << timestampLeftShift)
                 | (datacenterId << datacenterIdShift)
                 | (workerId << workerIdShift) | sequence;
