@@ -1,3 +1,4 @@
 rootProject.name = 'hp'
-include 'hp_common'
-
+include ':hr_common'
+include ':hr_company'
+include ':hr_employee'
