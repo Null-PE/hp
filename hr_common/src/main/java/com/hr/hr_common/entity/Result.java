@@ -1,12 +1,10 @@
 package com.hr.hr_common.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result {
     private boolean success;
     private int code;
