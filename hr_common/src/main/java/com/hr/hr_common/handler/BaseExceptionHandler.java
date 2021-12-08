@@ -1,7 +1,9 @@
-package com.hr.hr_common.exception.handler;
+package com.hr.hr_common.handler;
 
 import com.hr.hr_common.entity.Result;
+import com.hr.hr_common.entity.ResultCode;
 import com.hr.hr_common.exception.CommonException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,5 +27,11 @@ public class BaseExceptionHandler {
             return new Result(ce.getCode());
         }
         return Result.ERROR();
+    }
+
+    @ExceptionHandler(value = AuthorizationException.class)
+    @ResponseBody
+    public Result error(HttpServletRequest request, HttpServletResponse response, AuthorizationException e) {
+        return new Result(ResultCode.UNAUTHORISED);
     }
 }
