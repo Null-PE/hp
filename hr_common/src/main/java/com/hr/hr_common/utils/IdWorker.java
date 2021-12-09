@@ -1,4 +1,4 @@
-package com.hr.hr_common;
+package com.hr.hr_common.utils;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;

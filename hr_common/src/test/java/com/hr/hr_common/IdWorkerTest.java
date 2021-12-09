@@ -1,5 +1,6 @@
 package com.hr.hr_common;
 
+import com.hr.hr_common.utils.IdWorker;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

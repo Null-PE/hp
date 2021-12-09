@@ -1,7 +1,7 @@
 package com.hr.hr_company.service;
 
 import com.hr.domain.company.Company;
-import com.hr.hr_common.IdWorker;
+import com.hr.hr_common.utils.IdWorker;
 import com.hr.hr_company.dao.CompanyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

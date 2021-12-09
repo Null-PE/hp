@@ -1,6 +1,6 @@
 package com.hr.hr_company;
 
-import com.hr.hr_common.IdWorker;
+import com.hr.hr_common.utils.IdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
