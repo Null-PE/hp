@@ -1,5 +1,6 @@
 package com.hr.hr_common.utils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,6 +57,29 @@ public class DateUtil {
         cal.set(Calendar.DAY_OF_MONTH, lastDay);
         SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
         return sdf.format(cal.getTime());
+    }
+
+    public static String getStrMonth(int month) {
+        String[] strs = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
+        if (month > 0 && month < 13) {
+            return strs[month - 1];
+        } else {
+            return "一";
+        }
+    }
+
+    public static String parseTimestampToStr(Timestamp timestamp, String timeFormat) {
+        SimpleDateFormat df = new SimpleDateFormat(timeFormat);
+        return df.format(timestamp);
+    }
+
+    public static String timestampToDate(long time, String timeFormat) {
+        if (time < 10000000000L) {
+            time = time * 1000;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
+        return sdf.format(new Date(Long.parseLong(String.valueOf(time))));
     }
 
 
