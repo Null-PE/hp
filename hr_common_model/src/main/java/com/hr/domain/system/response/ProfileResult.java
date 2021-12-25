@@ -4,10 +4,14 @@ package com.hr.domain.system.response;
 import com.hr.domain.system.Permission;
 import com.hr.domain.system.Role;
 import com.hr.domain.system.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.*;
 
+@Getter
+@Setter
 public class ProfileResult implements Serializable {
     private String userId;
     private String mobile;

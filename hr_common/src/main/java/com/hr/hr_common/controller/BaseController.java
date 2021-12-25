@@ -1,5 +1,6 @@
 package com.hr.hr_common.controller;
 
+import com.hr.domain.system.response.ProfileResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -24,7 +25,10 @@ public class BaseController {
         Subject subject = SecurityUtils.getSubject();
         PrincipalCollection principalCollection = subject.getPrincipals();
         if (principalCollection != null && !principalCollection.isEmpty()) {
-
+            ProfileResult result = (ProfileResult) principalCollection.getPrimaryPrincipal();
+            this.companyId = result.getCompanyId();
+            this.companyName = result.getCompany();
+            this.userId = result.getUserId();
         }
 
     }

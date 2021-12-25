@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.springframework:spring-web:5.3.13'
     implementation 'javax.servlet:servlet-api:3.0-alpha-1'
     implementation 'org.apache.shiro:shiro-core:1.7.1'
+    implementation project(':hr_common_model')
 }
 
 tasks.named('test') {
